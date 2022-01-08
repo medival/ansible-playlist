@@ -1,0 +1,8 @@
+[webserver]
+ansible_user=medival ansible_host=10.184.15.193
+
+[db]
+ansible_user=medival ansible_host=10.184.15.194
+
+[loadtest]
+ansible_user=medival ansible_host=10.184.0.59
