@@ -4,13 +4,13 @@
     - name: Ping All Servers
       action: ping
     - name: Uname Execute Shell Commands
-      shell: uname 
+      command: uname
       register: uname_result
       changed_when: uname_result.rc != 0
     - debug: msg="{{ uname_result.stdout }}"
 
     - name: Verifying Hosts
-      shell: cat /etc/hosts
+      command: cat /etc/hosts
       register: hosts_result
       changed_when: hosts_result.rc != 0
     - debug: msg="{{ hosts_result.stdout }}"
