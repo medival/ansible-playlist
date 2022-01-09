@@ -5,14 +5,8 @@
       action: ping
     - debug: msg="Hello"
 
-    - name: Execute Shell Commands Uname
-      ansible.builtin.shell: uname
-      register: uname_result
-      changed_when: uname_result.rc != 0
-    - debug: msg="{{ uname_result.stdout }}"
-
-    - name: Execute Shell Commands Verifying Hosts 
-      ansible.builtin.shell: cat /etc/hosts
-      register: cat_result
-      changed_when: cat_result.rc != 0
-    - debug: msg="{{ cat_result.stdout }}"
+    - name: Execute Shell Commands
+      ansible.builtin.shell: uname && cat /etc/hosts
+      register: shell_result
+      changed_when: shell_result.rc != 0
+    - debug: msg="{{ shell_result.stdout }}"
