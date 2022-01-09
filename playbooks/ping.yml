@@ -9,8 +9,8 @@
       shell: uname 
       register: uname_result
       changed_when: uname_result.rc != 0
-    - debug: msg="{{ uname_result.stdout }}"
+    - debug: "{{ uname_result.stdout }}"
       shell: cat /etc/hosts
       register: hosts_result
       changed_when: hosts_result.rc != 0
-    - debug: msg="{{ hosts_result.stdout }}"
+    - debug: "{{ hosts_result.stdout }}"
