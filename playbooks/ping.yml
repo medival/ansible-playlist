@@ -5,11 +5,13 @@
       action: ping
     - debug: msg="{{ ping }}"
 
-    - name: Execute Shell Commands
+    - name: Uname Execute Shell Commands
       shell: uname 
       register: uname_result
       changed_when: uname_result.rc != 0
     - debug: "{{ uname_result.stdout }}"
+
+    - name: Verifying Hosts
       shell: cat /etc/hosts
       register: hosts_result
       changed_when: hosts_result.rc != 0
