@@ -3,7 +3,7 @@
   tasks:
     - name: Ping All Servers
       action: ping
-    - debug: msg="{{ ping.stdout }}"
+    - debug: msg="{{ ping }}"
 
     - name: Execute Shell Commands
       ansible.builtin.shell: uname && cat /etc/hosts
