@@ -11,7 +11,7 @@
       changed_when: uname_result.rc != 0
     - debug: msg="{{ uname_result.stdout }}"
 
-    - name: Execute Shell Commands Verifying Hosts 
+    - name: Execute Shell Commands Verifying Hosts
       ansible.builtin.shell: cat /etc/hosts
       register: cat_result
       changed_when: cat_result.rc != 0
