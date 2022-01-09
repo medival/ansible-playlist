@@ -3,7 +3,6 @@
   tasks:
     - name: Ping All Servers
       action: ping
-
     - name: Uname Execute Shell Commands
       shell: uname 
       register: uname_result
