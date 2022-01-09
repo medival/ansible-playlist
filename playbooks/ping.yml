@@ -3,10 +3,14 @@
   tasks:
     - name: Ping All Servers
       action: ping
-    - debug: msg="{{ ping }}"
+    - name: Uname Execute Shell Commands
+      shell: uname 
+      register: uname_result
+      changed_when: uname_result.rc != 0
+    - debug: msg="{{ uname_result.stdout }}"
 
-    - name: Execute Shell Commands
-      ansible.builtin.shell: uname && cat /etc/hosts
-      register: shell_result
-      changed_when: shell_result.rc != 0
-    - debug: msg="{{ shell_result.stdout }}"
+    - name: Verifying Hosts
+      shell: cat /etc/hosts
+      register: hosts_result
+      changed_when: hosts_result.rc != 0
+    - debug: msg="{{ hosts_result.stdout }}"
