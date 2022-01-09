@@ -6,7 +6,11 @@
     - debug: msg="{{ ping }}"
 
     - name: Execute Shell Commands
-      shell: uname && cat /etc/hosts
-      register: shell_result
-      changed_when: shell_result.rc != 0
-    - debug: msg="{{ shell_result.stdout }}"
+      shell: uname 
+      register: uname_result
+      changed_when: uname_result.rc != 0
+    - debug: msg="{{ uname_result.stdout }}"
+      shell: cat /etc/hosts
+      register: hosts_result
+      changed_when: hosts_result.rc != 0
+    - debug: msg="{{ hosts_result.stdout }}"
