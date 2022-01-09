@@ -4,7 +4,7 @@
     - name: Ping All Servers
       action: ping
     - name: Uname Execute Shell Commands
-      command: uname 
+      command: uname
       register: uname_result
       changed_when: uname_result.rc != 0
     - debug: msg="{{ uname_result.stdout }}"
