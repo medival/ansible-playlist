@@ -1,1 +1,2 @@
 ddb-openstack-api
+/group_vars/all/clouds.yaml
