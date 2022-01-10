@@ -1,0 +1,14 @@
+# ansible create webserver
+- hosts: all
+  user: ubuntu
+  become: true
+  tasks:
+- name: Install the latest version of Apache
+  apt:
+    name: apache2
+  state: latest
+  update_cache: yes
+- name: Restart Apache webserver
+  service:
+    name: apache2
+  state: restarted

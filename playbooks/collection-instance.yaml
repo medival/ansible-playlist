@@ -1,0 +1,22 @@
+# Ansible launch instance
+- name: Launch a compute instance
+  hosts: localhost
+  tasks:
+- name: Launch a VM
+  os_server:
+    image: Ubuntu 14.04 LTS x64
+    name: vm2
+    key_name: my_keypair_dd2d
+    availability_zone: nova
+    flavor: 22
+    state: present
+    network: floatingIPv4
+    register: my_vm
+- name: Add VM to inventory
+  add_host:
+    name: my_openstack_vm
+    groups: openstack_vms
+    ansible_host: "{{ my_vm.server.public_v4 }}"
+- name: Wait to be sure ssh is available
+  pause:
+    seconds: 30

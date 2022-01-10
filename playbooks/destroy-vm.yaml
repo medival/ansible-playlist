@@ -1,0 +1,7 @@
+- name: Destroy a compute instance
+  hosts: localhost
+  tasks:
+- name: Destroy a VM
+  os_server:
+    name: vm2
+  state: absent<(code)>
