@@ -1,0 +1,32 @@
+[DEFAULT]
+core_plugin = ml2
+{% set rabbitmq_cluster = [] %}
+{%- for host in groups.controller -%}
+{{ rabbitmq_cluster.append( rabbitmq_user+":"+rabbitmq_password+"@"+host ) }}
+{%- endfor -%}
+
+transport_url = rabbit://{{ rabbitmq_cluster|join(',') }}
+auth_strategy = keystone
+
+[agent]
+root_helper = sudo /usr/bin/neutron-rootwrap /etc/neutron/rootwrap.conf
+
+[oslo_concurrency]
+lock_path = /var/lib/neutron/tmp
+
+[database]
+
+[keystone_authtoken]
+auth_url = http://{{ openstack_vip_address }}:{{keystone_port}}
+auth_uri = http://{{ openstack_vip_address }}:{{keystone_port}}
+{% set memcached_cluster = [] %}
+{%- for host in groups.controller -%}
+{{ memcached_cluster.append( host+":"+'11211' ) }}
+{%- endfor -%}
+memcached_servers = {{ memcached_cluster|join(',') }}
+auth_type = password
+project_domain_name = Default
+user_domain_name = Default
+project_name = service
+username = neutron
+password = {{ neutron_user_password }}

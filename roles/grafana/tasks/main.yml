@@ -1,0 +1,36 @@
+- name: Download Grafana
+  get_url:
+    url: https://s3-us-west-2.amazonaws.com/grafana-releases/release/grafana_5.1.0_amd64.deb
+    dest: /tmp/grafana_5.1.0_amd64.deb 
+
+- name: Install Grafana
+  apt:
+    name: libfontconfig
+
+- name: Install Grafana
+  apt:
+    deb: /tmp/grafana_5.1.0_amd64.deb
+
+- name: Start Grafana
+  service:
+    name: grafana-server
+    enabled: yes
+    state: started
+
+- name: Create database
+  include: mysql.yml
+  run_once: true
+
+- name: Install Grafana plugin gnocchi-datasource
+  command: grafana-cli plugins install gnocchixyz-gnocchi-datasource
+
+- name: Configure grafana
+  include: config.yml
+
+- name: Restart Grafana
+  service:
+    name: grafana-server
+    enabled: yes
+    state: restarted
+  retries: 10
+  delay: 5

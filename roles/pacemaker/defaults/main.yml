@@ -1,0 +1,35 @@
+#crm configure
+stonith_enabled_parameter: "false"
+pe_warn_series_max_parameter: "1000"
+pe_input_series_max_parameter: "1000"
+pe_error_series_max_parameter: "1000"
+cluster_recheck_interval_parameter: "5min"
+stonith_enabled: stonith-enabled={{ stonith_enabled_parameter }}
+pe_warn_series_max: pe-warn-series-max={{ pe_warn_series_max_parameter }}
+pe_input_series_max: pe-input-series-max={{ pe_input_series_max_parameter }}
+pe_error_series_max: pe-error-series-max={{ pe_error_series_max_parameter }}
+cluster_recheck_interval: cluster-recheck-interval={{ cluster_recheck_interval_parameter }}
+crm_configure: "{{ pe_warn_series_max }} {{ pe_input_series_max }} {{ pe_error_series_max }} {{ cluster_recheck_interval }}"
+
+# redis
+depth: "0"
+timeout: "60s"
+interval_depth: "45s"
+interval_master: "20s"
+interval_slave: "60s"
+master_role: "Master"
+slave_role: "Slave"
+monitor_depth: op monitor depth={{ depth }} timeout={{ timeout }} interval={{ interval_depth }}
+monitor_master: op monitor role={{ master_role }} depth={{ depth }} timeout={{ timeout }} interval={{ interval_master }}
+monitor_slave: op monitor role={{ slave_role }} depth={{ depth }} timeout={{ timeout }} interval={{ interval_slave }}
+
+# crm configure colocation and order
+colocation: "vip-with-haproxy inf: vip haproxy-clone ms_redis:Master"
+order: "haproxy-after-vip mandatory: vip haproxy-clone"
+# crm vip
+net_mask: "{{ hostvars[inventory_hostname]['ansible_%s' | format(network_manage_interface)].ipv4.address }}/{{ hostvars[inventory_hostname]['ansible_%s' | format(network_manage_interface)].ipv4.netmask }}"
+net_cidr: "{{ net_mask | ipaddr('prefix') }}"
+interval: "30s"
+crm_vip: ocf:heartbeat:IPaddr2 params ip="{{ openstack_vip_address }}" nic="{{ network_manage_interface }}"  cidr_netmask="{{ net_cidr }}" op monitor interval="{{ interval }}"
+
+

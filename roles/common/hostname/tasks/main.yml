@@ -1,0 +1,18 @@
+- name: Set hostname
+  hostname: 
+    name: "{{ inventory_hostname }}"
+
+- name: Add Virtual hostname to /etc/hosts
+  lineinfile:
+    dest: /etc/hosts
+    line: "{{ openstack_vip_address }} {{ openstack_vip_hostname }}"
+    state: present
+  when: "( groups['controller'] | length > 1)"
+
+- name: Add hostname to /etc/hosts
+  lineinfile:
+    dest: /etc/hosts
+    regexp: '.*{{ item }}$'
+    line: '{{ hostvars[item].ansible_host }} {{item}}'
+    state: present
+  with_items: '{{ groups["all"] }}'

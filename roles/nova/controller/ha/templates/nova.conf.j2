@@ -1,0 +1,91 @@
+[DEFAULT]
+{% if ansible_distribution == "CentOS"  or ansible_distribution == 'Red Hat Enterprise Linux' %}
+enabled_apis = osapi_compute,metadata
+{% endif %}
+state_path = /var/lib/nova
+my_ip = {{ hostvars[inventory_hostname]['ansible_%s' | format(network_manage_interface)].ipv4.address }}
+use_neutron = true
+firewall_driver = nova.virt.firewall.NoopFirewallDriver
+{% set rabbitmq_cluster = [] %}
+{%- for host in groups.controller -%}
+{{ rabbitmq_cluster.append( rabbitmq_user+":"+rabbitmq_password+"@"+host ) }}
+{%- endfor -%}
+
+transport_url = rabbit://{{ rabbitmq_cluster|join(',') }}
+osapi_compute_listen = {{ inventory_hostname }}
+metadata_listen = {{ inventory_hostname }}
+
+[api]
+auth_strategy = keystone
+
+[api_database]
+connection = mysql+pymysql://nova:{{ nova_db_password }}@{{ openstack_vip_address }}/nova_api
+
+[cells]
+
+[cinder]
+os_region_name = RegionOne
+
+[database]
+connection = mysql+pymysql://nova:{{ nova_db_password }}@{{ openstack_vip_address }}/nova
+
+[glance]
+api_servers = http://{{ openstack_vip_address }}:9292
+
+[oslo_concurrency]
+lock_path = /var/lib/nova/tmp
+
+[keystone_authtoken]
+auth_url = http://{{ openstack_vip_address }}:{{keystone_port}}/v3
+{% set memcached_cluster = [] %}
+{%- for host in groups.controller -%}
+{{ memcached_cluster.append( host+":"+'11211' ) }}
+{%- endfor -%}
+memcached_servers = {{ memcached_cluster|join(',') }}
+auth_type = password
+project_domain_name = Default
+user_domain_name = Default
+project_name = service
+username = nova
+password = {{ nova_user_password }}
+
+[neutron]
+url = http://{{ openstack_vip_address }}:9696
+auth_url = http://{{ openstack_vip_address }}:{{keystone_port}}
+auth_type = password
+project_domain_name = Default
+user_domain_name = Default
+region_name = RegionOne
+project_name = service
+username = neutron
+password = {{ neutron_user_password }}
+service_metadata_proxy = true
+metadata_proxy_shared_secret = {{ metadata_secret }}
+
+[placement]
+project_domain_name = Default
+project_name = service
+auth_type = password
+user_domain_name = Default
+auth_url = http://{{ openstack_vip_address }}:{{keystone_port}}/v3
+username = placement
+password = {{ plancement_user_password }}
+
+[cache]
+enabled = true
+{% set memcached_cluster = [] %}
+{%- for host in groups.controller -%}
+{{ memcached_cluster.append( host+":"+'11211' ) }}
+{%- endfor -%}
+memcache_servers = {{ memcached_cluster|join(',') }}
+backend = oslo_cache.memcache_pool
+
+[vnc]
+enabled = true
+server_listen = $my_ip
+server_proxyclient_address = $my_ip
+novncproxy_host = $my_ip
+
+[scheduler]
+discover_hosts_in_cells_interval = 300
+

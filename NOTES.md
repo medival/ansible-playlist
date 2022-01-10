@@ -8,6 +8,9 @@ pip install ansible openstacksdk
 
 ansible-galaxy collection install openstack.cloud
 
+### Location clouds.yaml
+~/.config/openstack/clouds.yaml
+
 ---
 
 - name: Using Openstack Cloud collection

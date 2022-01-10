@@ -1,0 +1,16 @@
+# main.yaml
+# in this configuration the structure files should like this
+# inside main.yaml
+# -----
+# - include: blazar_pre_install.yml
+#   tags:
+#     - blazar-install
+#
+# inside blazar-instal, there is sub task
+# - name: create blazar group
+#   group:
+#     name: "{{ blazar_system_group_name }}"
+#     state: present
+- include: listing-instance.yaml
+  tags:
+    - list-instance

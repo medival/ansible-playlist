@@ -1,0 +1,20 @@
+- name: Set Virtual IP address {{ openstack_vip_address }}
+  command: crm configure primitive vip {{ crm_vip }}
+  run_once: true
+
+- name: Pacemaker configure redis to the cluster
+  command: "{{ item }}"
+  with_items:
+    - crm configure primitive redis ocf:heartbeat:redis op monitor interval="1s" {{ monitor_depth }} {{ monitor_master }} {{ monitor_slave }}
+    - crm configure ms ms_redis redis meta notify="true" interleave="true"
+  run_once: true
+
+- name: Add HAProxy to the cluster
+  command: "{{ item }}"
+  with_items:
+    - crm cib new conf-haproxy
+    - crm configure primitive haproxy lsb:haproxy op monitor interval="1s"
+    - crm configure clone haproxy-clone haproxy
+    - crm configure colocation {{ colocation }}
+    - crm configure order {{ order }}
+  run_once: true

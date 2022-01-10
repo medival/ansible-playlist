@@ -1,0 +1,24 @@
+- name: Install heat 
+  apt:
+    name: "{{ item }}"
+  with_items:
+    - heat-api 
+    - heat-api-cfn 
+    - heat-engine
+
+- name: Copy heat.conf
+  include: config.yml
+
+- name: Prerequisites Database
+  include: mysql.yml
+  run_once: true
+
+
+- name: Restart the Orchestration service
+  service:
+    name: "{{ item }}"
+    state: restarted
+  with_items:
+    - heat-api 
+    - heat-api-cfn 
+    - heat-engine

@@ -1,0 +1,4 @@
+- name: list instance
+  group:
+    name: "{{ blazar_system_group_name }}"
+    state: present
