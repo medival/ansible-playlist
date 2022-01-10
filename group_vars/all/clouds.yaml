@@ -9,33 +9,33 @@
 clouds:
   ddb-staging:
     auth:
-      auth_url: https://public.gti.bri.co.id:5000/v3/
-      username: "arif"
-      project_id: 5e83fd72530f44629dde1dfa5b1865f2
-      project_name: "ddb-development"
+      auth_url: https://{{ url }}:5000/v3/
+      username: "{{ username }}"
+      project_id: "{{ projectid }}"
+      project_name: "{{ project_name }}"
       user_domain_name: "Default"
-    region_name: "gti"
+    region_name: "{{ region }}"
     interface: "public"
     identity_api_version: 3
 
   ddb-dev:
     auth:
-      auth_url: https://public.gti.bri.co.id:5000/v3/
-      username: "arif"
-      project_id: 5e83fd72530f44629dde1dfa5b1865f2
-      project_name: "ddb-development"
+      auth_url: https://{{ url }}:5000/v3/
+      username: "{{ username }}"
+      project_id: "{{ projectid }}"
+      project_name: "{{ project_name }}"
       user_domain_name: "Default"
-    region_name: "gti"
+    region_name: "{{ region }}"
     interface: "public"
     identity_api_version: 3
 
   ddb-uat:
     auth:
-      auth_url: https://public.gti.bri.co.id:5000/v3/
-      username: "arif"
-      project_id: a32b963743564ff9bf984b54fc4b31b9
-      project_name: "ddb-uat"
+      auth_url: https://{{ url }}:5000/v3/
+      username: "{{ username }}"
+      project_id: "{{ projectid }}"
+      project_name: "{{ project_name }}"
       user_domain_name: "Default"
-    region_name: "gti"
+    region_name: "{{ region }}"
     interface: "public"
     identity_api_version: 3
