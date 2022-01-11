@@ -1,3 +1,4 @@
+---
 - name: Execute Shell Commands
   shell: uname
   register: uname_result
