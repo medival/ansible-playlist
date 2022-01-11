@@ -1,8 +1,8 @@
 - name: Ping All Servers
-  import-playbook: ping.yml
+  import_playbook: ping.yml
 
 - name: Execute Shell
-  import-playbook: execute-shell.yml
+  import_playbook: execute-shell.yml
 
 - name: Check Host
-  import-playbook: check-host.yml
+  import_playbook: check-host.yml
