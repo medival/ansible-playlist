@@ -1,0 +1,8 @@
+- name: Ping All Servers
+  include: ping.yml
+
+- name: Execute Shell
+  include: execute-shell.yml
+
+- name: Check Host
+  include: check-host.yml
