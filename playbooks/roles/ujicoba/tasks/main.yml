@@ -1,14 +1,10 @@
 ---
-- hosts: All
-  become: true
-  roles:
-    - ujicoba
-
-# - name: Ping All Servers
-#   import_playbook: ping.yml
-
-# - name: Execute Shell
-#   import_playbook: execute-shell.yml
-
-# - name: Check Host
-#   import_playbook: check-host.yml
+# tasks file for apache
+# - include: install.yml
+# - include: start.yml
+# - include: apt-update.yml
+# - include: ping.yml
+# - include: execute-shell.yml
+# - include: check-hosts.yml
+- include: setup-ntp-client.yml
+- include: stop-nginx.yml

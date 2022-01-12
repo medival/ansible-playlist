@@ -1,0 +1,16 @@
+[all]
+ansible_user=medival ansible_host=10.184.15.193
+ansible_user=medival ansible_host=10.184.15.194
+ansible_user=medival ansible_host=10.184.0.59
+
+[webserver]
+ansible_user=adi_konsultan ansible_host=10.184.15.193
+
+[db]
+ansible_user=medival ansible_host=10.184.15.194
+
+[loadtest]
+ansible_user=medival ansible_host=10.184.0.59
+
+[localhost]
+ansible_user=medival ansible_host=localhost
