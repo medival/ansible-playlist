@@ -1,0 +1,24 @@
+---
+- name: Remove package composer
+  become: true
+  become_method: sudo
+  become_user: root
+  apt: 
+    name: composer 
+    state: absent
+
+- name: Remove package ytdl
+  become: true
+  become_method: sudo
+  become_user: root
+  apt:
+    name: youtube-dl
+    state: absent
+
+- name: Remove package msyql-client
+  become: true
+  become_method: sudo
+  become_user: root
+  apt:
+    name: default-mysql-client
+    state: absent

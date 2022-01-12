@@ -1,7 +1,4 @@
 ---
-- hosts: webserver
-  become: true
-  become_method: sudo
-  become_user: medival
+- hosts: all
   roles:
     - base

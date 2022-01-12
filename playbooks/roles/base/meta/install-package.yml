@@ -1,0 +1,3 @@
+---
+- name: Install Package
+  apt: name=composer state=latest

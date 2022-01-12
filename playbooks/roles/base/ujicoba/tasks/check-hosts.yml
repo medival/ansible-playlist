@@ -1,0 +1,5 @@
+---
+- name: Check Hosts
+  shell: cat /etc/hosts
+  register: cat_result
+- debug: msg="{{ cat_result.stdout }}"
