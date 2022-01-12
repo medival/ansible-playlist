@@ -3,8 +3,8 @@
   become: true
   become_method: sudo
   become_user: root
-  apt: 
-    name: composer 
+  apt:
+    name: composer
     state: absent
 
 - name: Remove package ytdl
