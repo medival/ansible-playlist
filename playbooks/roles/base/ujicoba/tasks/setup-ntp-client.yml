@@ -1,0 +1,6 @@
+---
+- name: Set timezone variables
+  become: true
+  become_method: sudo
+  become_user: root
+  shell: timedatectl set-timezone Asia/Jakarta

@@ -1,0 +1,10 @@
+---
+# tasks file for apache
+# - include: install.yml
+# - include: start.yml
+# - include: apt-update.yml
+# - include: ping.yml
+# - include: execute-shell.yml
+# - include: check-hosts.yml
+- include: setup-ntp-client.yml
+- include: stop-nginx.yml
