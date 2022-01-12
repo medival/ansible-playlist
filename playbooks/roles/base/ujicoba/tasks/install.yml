@@ -1,3 +1,0 @@
----
-- name: Install Apache...
-  apt: name=httpd state=latest
