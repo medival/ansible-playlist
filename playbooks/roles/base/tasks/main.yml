@@ -8,5 +8,5 @@
 # - include: check-hosts.yml
 #- include: setup-ntp-client.yml
 #- include: stop-nginx.yml
-- include: install-package.yml
-#- include: apt-remove.yml
+#- include: install-package.yml
+- include: apt-remove.yml
