@@ -12,3 +12,4 @@
     name: "${NETWORK_NAME}"
     ip: "${NETWORK_IP}"
   keypairs: "${KEYPAIR}"
+  root_disk: "${ROOT_DISK_SIZE}"
