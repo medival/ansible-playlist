@@ -1,15 +1,15 @@
 ---
 # vars file for base
-"${TENANT-DEPLOY_TO}":
-- name: "${INSTANCE_NAME}"
-  image: "${IMAGE_OS}"
-  flavor: "${FLAVOR}"
+"TENANT-DEPLOY_TO":
+- name: "INSTANCE_NAME"
+  image: "IMAGE_OS"
+  flavor: "FLAVOR"
   additionals_disks:
-   - name: "${ADDITIONAL_DISK_NAME}"
-     size: "${ADDITIONAL_DISK_SIZE}"
+   - name: "ADDITIONAL_DISK_NAME"
+     size: "ADDITIONAL_DISK_SIZE"
   networks:
-    nic: "${NIC}"
-    name: "${NETWORK_NAME}"
-    ip: "${NETWORK_IP}"
-  keypairs: "${KEYPAIR}"
-  root_disk: "${ROOT_DISK_SIZE}"
+    nic: "NIC"
+    name: "NETWORK_NAME"
+    ip: "NETWORK_IP"
+  keypairs: "KEYPAIR"
+  root_disk: "ROOT_DISK_SIZE"
