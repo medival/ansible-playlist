@@ -6,10 +6,10 @@
   flavor: "FLAVOR"
   additionals_disks:
    - name: "ADDITIONAL_DISK_NAME"
-     size: "ADDITIONAL_DISK_SIZE"
+     size: ADDITIONAL_DISK_SIZE
   networks:
     nic: "NIC"
     name: "NETWORK_NAME"
     ip: "NETWORK_IP"
   keypairs: "KEYPAIR"
-  root_disk: "ROOT_DISK_SIZE"
+  root_disk: ROOT_DISK_SIZE
