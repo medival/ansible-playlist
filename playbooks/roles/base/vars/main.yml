@@ -1,6 +1,6 @@
 ---
 # vars file for base
-"TENANT-DEPLOY_TO":
+"TENANT-ENVIRONMENT":
 - name: "INSTANCE_NAME"
   image: "IMAGE_OS"
   flavor: "FLAVOR"
